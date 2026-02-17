@@ -1,61 +1,61 @@
-.TH "K4DIRSTAT" "1" "May 2015" "" ""
+.TH "K4DIRSTAT" "1" "Mai 2015" "" ""
 .
-.SH "NAME"
-\fBk4dirstat\fR \- Graphical directory statistics
+.SH "NOM"
+\fBk4dirstat\fR \- Statistiques graphiques des répertoires
 .
 .SH "SYNOPSIS"
-\fBk4dirstat\fR [\fIOPTIONS\fR\.\.\.] [\fIpath or url\fR]
+\fBk4dirstat\fR [\fIOPTIONS\fR\.\.\.] [\fIchemin ou url\fR]
 .
 .SH "DESCRIPTION"
-Shows where all your disk space has gone and helps you clean it up\. The size of files and directory is shown using treemapping\.
+Affiche où est passé tout votre espace disque et vous aide à le nettoyer\. La taille des fichiers et des répertoires est affichée sous forme de carte d'arborescence\.
 .
 .TP
-\fIpath or url\fR
-Directory or URL to open
+\fIchemin ou url\fR
+Répertoire ou URL à ouvrir
 .
 .SH "OPTIONS"
 .
 .TP
 \fB\-v\fR, \fB\-version\fR
-Output version information and exit\.
+Affiche les informations de version et quitte\.
 .
-.SS "Qt options"
-.
-.TP
-\fB\-platform\fR \fIplatformName[:options]\fR
-specifies the Qt Platform Abstraction (QPA) plugin\. Overridden by the \fBQT_QPA_PLATFORM\fR environment variable\.
+.SS "Options Qt"
 .
 .TP
-\fB\-platformpluginpath\fR \fIpath\fR
-specifies the path to platform plugins\. Overridden by the \fBQT_QPA_PLATFORM_PLUGIN_PATH\fR environment variable\.
+\fB\-platform\fR \fInomPlateforme[:options]\fR
+spécifie le module Qt Platform Abstraction (QPA)\. Remplacé par la variable d'environnement \fBQT_QPA_PLATFORM\fR\.
 .
 .TP
-\fB\-platformtheme\fR \fIplatformTheme\fR
-specifies the platform theme\. Overridden by the \fBQT_QPA_PLATFORMTHEME\fR environment variable\.
+\fB\-platformpluginpath\fR \fIchemin\fR
+spécifie le chemin vers les modules de plateforme\. Remplacé par la variable d'environnement \fBQT_QPA_PLATFORM_PLUGIN_PATH\fR\.
 .
 .TP
-\fB\-plugin\fR \fIplugin\fR
-specifies additional plugins to load\. The argument may appear multiple times\. Overridden by the \fBQT_QPA_GENERIC_PLUGINS\fR environment variable\.
+\fB\-platformtheme\fR \fIthèmePlateforme\fR
+spécifie le thème de la plateforme\. Remplacé par la variable d'environnement \fBQT_QPA_PLATFORMTHEME\fR\.
 .
 .TP
-\fB\-qwindowgeometry\fR \fIgeometry\fR
-specifies window geometry for the main window using the X11\-syntax\. For example: \fB\-qwindowgeometry 100x100+50+50\fR\.
+\fB\-plugin\fR \fImodule\fR
+spécifie des modules supplémentaires à charger\. L'argument peut apparaître plusieurs fois\. Remplacé par la variable d'environnement \fBQT_QPA_GENERIC_PLUGINS\fR\.
+.
+.TP
+\fB\-qwindowgeometry\fR \fIgéométrie\fR
+spécifie la géométrie de la fenêtre principale en syntaxe X11\. Par exemple : \fB\-qwindowgeometry 100x100+50+50\fR\.
 .
 .TP
 \fB\-qwindowicon\fR
-sets the default window icon\.
+définit l'icône de fenêtre par défaut\.
 .
 .TP
 \fB\-qwindowtitle\fR
-sets the title of the first window\.
+définit le titre de la première fenêtre\.
 .
 .TP
-\fB\-display\fR \fIhostname\fR
-screen_number, switches displays on X11\. Overrides the \fBDISPLAY\fR environment variable\.
+\fB\-display\fR \fIhôte\fR
+numéro_écran, change d'écran sous X11\. Remplace la variable d'environnement \fBDISPLAY\fR\.
 .
 .TP
 \fB\-geometry\fR
-geometry, same as \fB\-qwindowgeometry\fR\.
+géométrie, identique à \fB\-qwindowgeometry\fR\.
 .
-.SH "AUTHOR"
-This man page was written by Jerome Robert.
+.SH "AUTEUR"
+Cette page de manuel a été rédigée par Jerome Robert\.
