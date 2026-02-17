@@ -1,0 +1,1967 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdirstat '<application>KDirStat</application>'>
+  <!ENTITY kapp "&kdirstat;"><!-- remplacer |NOMLITTLE| ici -->
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % French "INCLUDE"><!-- changer de langue uniquement ici -->
+
+
+  <!-- Ne pas définir d'autres entités ; utiliser à la place les entités
+       de kde-genent.entities et $LANG/user.entities. -->
+]>
+<!-- kdoctemplate v0.8 1er octobre 1999
+     Mise à jour mineure de la section "Remerciements et licences" le 24 août 2000
+     Suppression de la section "Historique des révisions" le 22 janvier 2001   -->
+
+<!--
+Ce modèle a été conçu par : David Rugge davidrugge@mindspring.com
+avec beaucoup d'aide de : Eric Bischoff ebisch@cybercable.tm.fr
+et Frederik Fouvry fouvry@sfs.nphil.uni-tuebingen.de
+de l'équipe KDE DocBook.
+
+Vous pouvez librement utiliser ce modèle pour rédiger tout type de documentation KDE.
+Si vous avez des modifications ou des améliorations, veuillez nous en informer.
+
+À l'avenir, nous pourrions vouloir passer de DocBook basé sur SGML à DocBook basé sur XML.
+Pour faciliter ce changement, veuillez être attentif :
+- en XML, la casse des <balises> et des attributs est importante ;
+- aussi, mettez tous les attributs entre guillemets.
+
+N'oubliez pas de supprimer tous ces commentaires dans votre documentation finale,
+merci ;-).
+-->
+
+<!-- ................................................................ -->
+
+<!-- La langue NE DOIT PAS être modifiée ici. -->
+
+<book lang="&language;">
+
+<!-- Cet en-tête contient toutes les méta-informations du document telles que
+les auteurs, la date de publication, le résumé et les mots-clés -->
+
+<bookinfo>
+<title>Le Manuel de KDirStat</title>
+
+<authorgroup>
+<author>
+<firstname>Stefan</firstname>
+<surname>Hundhammer</surname>
+<affiliation>
+<address><email>sh@suse.de</email></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+<copyright>
+<year>1999-2005</year>
+<holder>Stefan Hundhammer</holder>
+</copyright>
+<!-- Traducteurs : insérez ici la notice de copyright de la traduction -->
+<!-- Insérez ici la notice FDL. Lisez l'explication dans fdl-notice.docbook
+     et dans la FDL elle-même pour savoir comment l'utiliser. -->
+<legalnotice>&FDLNotice;</legalnotice>
+
+<!-- Informations de date et de version de la documentation
+N'oubliez pas d'inclure cette dernière date et ce dernier numéro de révision, nous
+en avons besoin pour la coordination des traductions !
+Veuillez respecter le format de la date (JJ/MM/AAAA) et de la version
+(V.MM.LL), il pourrait être utilisé par des scripts d'automatisation.
+Ne PAS modifier ces informations dans la traduction. -->
+
+<date>2002-02-22</date>
+<releaseinfo>2.4.4</releaseinfo>
+
+
+<!-- Résumé de ce manuel -->
+
+<abstract>
+<para>
+&kdirstat; est un utilitaire graphique d'utilisation du disque, très similaire à la commande Unix "du",
+avec en plus des fonctions de nettoyage pour récupérer de l'espace disque.
+</para>
+</abstract>
+
+<!-- Ceci est un ensemble de mots-clés pour l'indexation par les moteurs de recherche.
+Veuillez au moins inclure KDE, le paquet KDE dans lequel il se trouve, le nom
+de votre application et quelques mots-clés pertinents. -->
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdeutils</keyword>
+<keyword>utilitaires</keyword>
+<keyword>système de fichiers</keyword>
+<keyword>utilisation du disque</keyword>
+<keyword>nettoyage</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- Le contenu de la documentation commence ici. Étiquetez
+chaque chapitre avec l'attribut id. Ceci est nécessaire pour deux raisons : cela
+vous permet de référencer facilement le chapitre depuis d'autres chapitres de votre
+document, et si aucun ID n'est présent, le nom des fichiers HTML générés variera
+d'une fois à l'autre, ce qui complique la gestion pour les mainteneurs et pour le
+système CVS. Tout chapitre étiqueté (OPTIONNEL) peut être omis à la discrétion de
+l'auteur. Les autres chapitres ne doivent pas être omis afin de maintenir un style
+de documentation cohérent dans toutes les applications KDE. -->
+
+
+
+
+<chapter id="overview">
+<title>Vue d'ensemble</title>
+
+<!-- Le chapitre d'introduction contient une brève introduction à
+l'application qui explique ce qu'elle fait et où signaler les
+problèmes. Essentiellement une version longue du résumé. N'incluez pas
+d'historique des révisions. (voir le commentaire de l'annexe d'installation) -->
+
+<para>
+&kapp; est un utilitaire graphique d'utilisation du disque. Il vous montre où est passé tout votre espace
+disque et essaie de vous aider à le nettoyer.
+</para>
+
+
+<sect1 id="screenshot">
+<title>Capture d'écran</title>
+
+<para>
+
+<screenshot>
+<screeninfo>La fenêtre principale de &kapp;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="kdirstat-main.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre principale</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+
+
+
+
+<sect1 id="features">
+<title>Fonctionnalités</title>
+
+
+<sect2><title>Fonctionnalités d'affichage</title>
+<itemizedlist>
+
+<listitem><para>
+Affichage graphique et numérique de l'espace disque utilisé
+</para></listitem>
+
+<listitem><para>
+Affichage en carte d'arborescence de l'espace disque utilisé
+</para></listitem>
+
+<listitem><para>
+Les fichiers sont séparés des répertoires dans des entrées &lt;Fichiers&gt; distinctes
+pour éviter d'encombrer l'affichage
+</para></listitem>
+
+
+<listitem><para>
+Tous les nombres affichés de façon lisible - par exemple, 34,4 Mo au lieu de 36116381 octets
+</para></listitem>
+
+
+<listitem><para>
+Gestion correcte des fichiers fragmentés - seuls les blocs réellement alloués
+sont ajoutés aux totaux.
+</para></listitem>
+
+
+<listitem><para>
+Gestion correcte des fichiers (ordinaires) avec plusieurs liens physiques - leur taille est
+divisée par leur nombre de liens physiques, distribuant ainsi équitablement leur taille sur
+les répertoires auxquels ils sont liés -- et, plus important, sans comptabiliser le même
+fichier plusieurs fois.
+</para></listitem>
+
+
+<listitem><para>
+Différentes couleurs dans l'affichage de l'arborescence pour distinguer visuellement
+les différents niveaux
+</para></listitem>
+
+
+<listitem><para>
+Affichage de la dernière date de modification dans toute une arborescence - vous pouvez facilement
+voir quel objet a été modifié en dernier et quand.
+</para></listitem>
+
+</itemizedlist>
+</sect2>
+
+
+<sect2><title>Lecture des répertoires</title>
+<itemizedlist>
+
+<listitem>
+<para>
+Reste par défaut sur un seul système de fichiers - lit les systèmes de fichiers montés
+uniquement sur demande.
+</para>
+<para>
+Vous ne vous souciez pas d'un système de fichiers /usr monté si le système de fichiers
+racine est plein et que vous devez rapidement en trouver la cause, pas plus que vous ne
+voulez analyser le répertoire personnel de tout le monde sur le serveur NFS quand votre
+disque local est plein.
+</para>
+</listitem>
+
+
+<listitem><para>
+Transparence réseau : analysez les répertoires FTP ou Samba - ou tout autre protocole
+supporté par KDE.
+</para></listitem>
+
+<listitem><para>
+Animation PacMan pendant la lecture des répertoires.
+D'accord, ce n'est pas vraiment essentiel, mais c'est amusant.
+</para></listitem>
+
+
+</itemizedlist>
+</sect2>
+
+
+<sect2><title>Nettoyage</title>
+<itemizedlist>
+
+<listitem><para>
+Actions de nettoyage prédéfinies : supprimez facilement un fichier ou une arborescence,
+déplacez-le vers la corbeille KDE, compressez-le en archive .tar.bz2 ou ouvrez simplement
+un terminal ou une fenêtre Konqueror.
+</para></listitem>
+
+
+<listitem><para>
+Actions de nettoyage définies par l'utilisateur : ajoutez vos propres commandes de nettoyage
+ou modifiez les existantes.
+</para></listitem>
+
+<listitem><para>
+Fonction "Envoyer un courriel au propriétaire" : envoyez un message demandant au propriétaire
+d'une grande arborescence de nettoyer les fichiers inutilisés.
+</para></listitem>
+
+
+</itemizedlist>
+</sect2>
+
+
+<sect2><title>Divers</title>
+<itemizedlist>
+
+<listitem><para>
+Fonction de courriel de retour d'information : évaluez le programme et donnez votre avis aux auteurs.
+</para></listitem>
+
+</itemizedlist>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="more-screen-shots">
+<title>Autres captures d'écran</title>
+
+
+<sect2><title>Configuration des actions de nettoyage</title>
+<para>
+<screenshot>
+<screeninfo>Configuration des actions de nettoyage</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="kdirstat-config-cleanups.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre de configuration des nettoyages</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+
+<sect2><title>Configuration des couleurs de l'arborescence</title>
+<para>
+<screenshot>
+<screeninfo>Configuration des couleurs de l'arborescence</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="kdirstat-config-tree-colors.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre de configuration des couleurs</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2><title>Courriel de retour d'information</title>
+<para>
+<screenshot>
+<screeninfo>Courriel de retour d'information</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="feedback-mail.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre de courriel de retour</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+</sect1>
+</chapter>
+
+
+
+
+<chapter id="basic_usage">
+<title>Utilisation de base</title>
+
+<sect1 id="invoking">
+<title>Lancer &kdirstat;</title>
+
+<para>
+Démarrez &kdirstat; depuis le menu KDE, faites un clic droit sur un répertoire dans une
+fenêtre Konqueror ou tapez
+<userinput>kdirstat</userinput> ou
+<userinput>kdirstat &lt;nom-du-répertoire&gt;</userinput> dans un terminal
+ou à l'invite <guibutton>Exécuter une commande</guibutton> de KDE
+(<keycap>Alt-F2</keycap>).
+</para>
+</sect1>
+
+<sect1 id="select_dir">
+<title>Sélectionner un répertoire</title>
+
+<para>
+&kdirstat; vous demandera un répertoire si vous n'en avez pas spécifié un au démarrage.
+Vous pouvez spécifier des répertoires locaux ainsi que des URL d'emplacements distants -
+<userinput>kdirstat /usr/lib</userinput> fonctionne tout aussi bien que
+<userinput>kdirstat ftp:/ftp.monserveur.org/pub</userinput>.
+</para>
+<para>
+Dans tous les cas, &kdirstat; commencera à lire ce répertoire. Cela peut prendre
+un certain temps, mais vous pouvez utiliser le programme pendant tout ce temps.
+</para>
+</sect1>
+
+<sect1 id="find_out_where">
+<title>Trouver ce qui utilise tout l'espace disque</title>
+
+<para>
+Regardez la colonne "Total du sous-arbre" ou attendez qu'un sous-arbre ait fini d'être
+lu et regardez l'affichage graphique des barres de pourcentage pour savoir quel sous-répertoire
+occupe quelle quantité d'espace disque. Utilisez les icônes ouvrir/fermer (signes plus et moins
+ou petites flèches, selon la configuration de votre KDE) ou double-cliquez sur un élément
+pour l'ouvrir ou le fermer.
+</para>
+<para>
+Remarquez comment les fichiers à n'importe quel niveau de répertoire sont séparés des
+sous-répertoires - il y a une entrée &lt;Fichiers&gt; distincte pour eux. De cette façon,
+vous pouvez facilement voir quelle quantité d'espace disque les fichiers utilisent par
+rapport aux sous-répertoires et à leurs fichiers respectifs.
+</para>
+</sect1>
+
+<sect1 id="do_something">
+<title>Agir en conséquence</title>
+
+<para>
+Une fois que vous avez découvert où va tout votre espace disque, agissez - c'est probablement
+la raison pour laquelle vous utilisez ce programme. Vous avez plusieurs options :
+</para>
+
+<itemizedlist>
+<listitem>
+<para>
+Aller dans un magasin informatique et acheter un nouveau disque dur.
+Ce n'est probablement pas ce que vous voulez. ;-)
+</para>
+</listitem>
+
+<listitem>
+<para>Demandez au propriétaire de ce fichier ou répertoire de bien vouloir faire le ménage.
+Vous pouvez utiliser &kdirstat; pour cela : sélectionnez ce fichier ou répertoire (c'est-à-dire,
+cliquez dessus avec le bouton gauche) et choisissez <guibutton>Envoyer un courriel au propriétaire</guibutton>
+depuis le menu contextuel (clic droit), depuis la barre d'outils (l'icône enveloppe) ou
+depuis le menu <guibutton>Rapport</guibutton>.
+</para>
+<para>
+Un message précomposé s'ouvrira dans votre
+<link linkend="mail_client">client de messagerie favori</link>.
+Vous pouvez modifier ce texte avant de l'envoyer. Le destinataire du
+message est l'utilisateur qui possède le fichier ou le répertoire que vous avez sélectionné -
+mais vous pouvez bien sûr modifier cela aussi dans le client de messagerie.
+</para>
+<para>
+Le message contiendra les éléments actuellement affichés ouverts à partir de l'élément
+sélectionné. Si vous voulez inclure plus d'éléments, ouvrez les répertoires correspondants ;
+si vous en voulez moins, fermez-les. Vous pouvez toujours supprimer des lignes dans le client
+de messagerie si vous les trouvez non pertinentes - il ne sert à rien de se plaindre de
+fichiers de 367 octets en même temps que d'autres qui occupent plusieurs mégaoctets.
+</para>
+
+</listitem>
+
+<listitem>
+<para>
+Lancez une action de "nettoyage". Il en existe plusieurs prédéfinies, et vous pouvez
+définir les vôtres. Utilisez le menu contextuel, la barre d'outils ou le menu
+<guibutton>Actions</guibutton> pour voir celles qui sont disponibles.
+</para>
+<para>
+Pour certaines actions de nettoyage, vous devrez attendre que l'arborescence soit
+complètement lue avant de pouvoir les activer. Si une action de nettoyage n'est toujours
+pas activée à ce moment, le type d'élément sélectionné n'est pas approprié pour ce type
+d'action : certaines actions ne peuvent être effectuées que sur des répertoires, tandis
+que d'autres ne peuvent être effectuées que sur des fichiers. Très peu d'actions
+fonctionnent pour les pseudo-entrées &lt;Fichiers&gt; car elles n'ont pas de
+correspondance réelle dans le système de fichiers.
+</para>
+</listitem>
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="treemaps">
+<title>Cartes d'arborescence</title>
+
+
+<sect1 id="treemap_intro">
+<title>Introduction rapide aux cartes d'arborescence</title>
+
+
+<sect2 id="what_are_treemaps">
+<title>Qu'est-ce que c'est ?</title>
+
+<para>
+Les rectangles ombrés que vous pouvez voir dans la moitié inférieure de la fenêtre principale
+de &kdirstat; sont appelés une "carte d'arborescence". C'est simplement une autre façon
+d'afficher des éléments dans une arborescence dont chacun a une valeur numérique, comme
+une taille de fichier.
+</para>
+
+<para>
+Chaque rectangle correspond à un fichier ou à un répertoire sur votre disque dur. Plus le
+rectangle est grand (ou plutôt, plus sa surface est grande), plus le fichier est grand.
+</para>
+
+</sect2>
+
+
+
+<sect2 id="how_to_use_treemaps">
+<title>Comment utiliser les cartes d'arborescence</title>
+
+<para>
+Regardez les plus grands rectangles. Cliquez sur l'un d'eux et il est sélectionné - à la
+fois dans la vue carte d'arborescence et dans la vue arborescente au-dessus (la liste
+au-dessus). Vous pouvez maintenant voir quel fichier ou répertoire c'est - à la fois dans
+la vue arborescente au-dessus et dans la barre d'état en bas.
+</para>
+
+<para>
+Trouvez les plus grands rectangles, identifiez-les et décidez quoi en faire :
+les conserver, les supprimer, peu importe. Utilisez les actions de nettoyage comme dans
+la vue arborescente. Le bouton droit de la souris ouvre un menu contextuel contenant
+les actions de nettoyage.
+</para>
+
+<para>
+L'ombrage donne des indications sur les fichiers qui appartiennent ensemble dans des
+répertoires. Les points lumineux indiquent approximativement où se trouve le centre
+des répertoires parents.
+</para>
+
+</sect2>
+
+
+
+<sect2 id="treemap_advantages">
+<title>Avantages et inconvénients des cartes d'arborescence</title>
+
+<para>
+Les cartes d'arborescence sont utiles pour trouver des fichiers volumineux uniques,
+éventuellement très profondément imbriqués dans la hiérarchie des répertoires. Elles
+n'aident pas beaucoup si de nombreux petits fichiers encombrent un répertoire - utilisez
+la vue arborescente (la liste) au-dessus de la carte d'arborescence pour cela.
+</para>
+
+<para>
+La carte d'arborescence elle-même ne donne pas beaucoup d'informations autres que les
+tailles relatives des fichiers. Elle peut vous indiquer où se trouvent les fichiers
+volumineux, même s'ils sont très profondément cachés dans des sous-répertoires. Vous
+voyez toujours tous les fichiers en même temps, pas seulement les tailles relatives
+des sous-répertoires entre eux comme dans la vue arborescente. Cliquez sur un fichier
+pour voir plus de détails dans la vue arborescente au-dessus.
+</para>
+
+<para>
+En résumé : la carte d'arborescence et la vue arborescente ont toutes deux leurs forces
+et leurs faiblesses. Utilisez une combinaison des deux pour tirer le meilleur parti
+des avantages de chacune.
+</para>
+
+</sect2>
+
+
+
+<sect2 id="getting_rid_of_treemaps">
+<title>Comment s'en débarrasser</title>
+
+<para>
+Si vous avez besoin de l'espace d'écran pour la vue arborescente (la liste) ou si vous
+trouvez que la mise à jour prend trop de temps à chaque suppression de fichier, vous pouvez
+faire glisser le séparateur entre la vue arborescente et la carte d'arborescence
+complètement vers le bas. La carte d'arborescence n'est pas reconstruite en dessous
+d'une certaine taille minimale, donc elle ne consomme plus de performance. Vous pouvez
+aussi décocher "Afficher la carte d'arborescence" dans le menu "Carte d'arborescence"
+ou simplement appuyer sur <keycap>F9</keycap>.
+</para>
+
+</sect2>
+</sect1>
+
+
+
+<sect1 id="treemap_actions">
+<title>Actions liées à la carte d'arborescence</title>
+
+
+<sect2 id="treemap_mouse_actions">
+<title>Actions de la souris dans la carte d'arborescence</title>
+
+<itemizedlist>
+
+<listitem><para>
+Un simple clic avec le bouton gauche de la souris sélectionne le fichier ou le répertoire
+cliqué à la fois dans la carte d'arborescence et dans la vue arborescente.
+</para></listitem>
+
+<listitem><para>
+Un simple clic avec le bouton central de la souris sélectionne le parent du fichier ou
+du répertoire cliqué.
+</para></listitem>
+
+<listitem><para>
+Un simple clic avec le bouton droit de la souris ouvre le menu contextuel.
+</para></listitem>
+
+<listitem><para>
+Un double-clic avec le bouton gauche de la souris zoome dans la carte d'arborescence
+sur le fichier ou le répertoire cliqué : la carte d'arborescence est réaffichée avec
+l'ancêtre quasi-supérieur du fichier ou du répertoire cliqué comme racine.
+</para></listitem>
+
+<listitem><para>
+Un double-clic avec le bouton central de la souris dézoome après un zoom.
+</para>
+<para>
+Si la carte d'arborescence n'est pas du tout zoomée, elle est simplement reconstruite
+pour s'adapter à l'espace d'écran disponible sans avoir besoin de barres de défilement.
+Ceci est principalement utile si le redimensionnement automatique de la carte
+d'arborescence (par défaut) est désactivé.
+</para></listitem>
+
+<listitem><para>
+Faire glisser le séparateur au-dessus de la carte d'arborescence redimensionne non
+seulement la sous-fenêtre de la carte d'arborescence, mais la reconstruit également
+et la fait s'adapter à l'espace disponible.
+</para></listitem>
+
+<listitem><para>
+Vous pouvez faire glisser le séparateur complètement vers le bas pour désactiver
+entièrement la carte d'arborescence. En dessous d'une taille minimale, la carte
+d'arborescence ne sera plus mise à jour, donc elle ne coûte aucune performance.
+</para></listitem>
+
+</itemizedlist>
+
+</sect2>
+
+
+<sect2 id="treemap_menu_actions">
+<title>Actions du menu Carte d'arborescence</title>
+
+<para>
+La plupart des actions de la souris sur la carte d'arborescence ont des équivalents dans
+le menu "Carte d'arborescence".
+</para>
+
+<para>
+De plus, "Afficher la carte d'arborescence" dans le menu "Carte d'arborescence" bascule
+l'affichage de la sous-fenêtre de la carte d'arborescence. Si désactivée, la carte
+d'arborescence est vraiment inactive et ne coûte aucune performance.
+</para>
+
+</sect2>
+</sect1>
+
+
+<sect1 id="treemap_in_depth">
+<title>Plus d'informations sur les cartes d'arborescence</title>
+
+<sect2 id="simple_treemap_construction">
+<title>Comment une carte d'arborescence simple est construite</title>
+
+<para>
+Dans sa forme la plus basique, la construction d'une carte d'arborescence est très simple :
+</para>
+
+<para>
+Tout d'abord, vous avez besoin d'une arborescence où chaque nœud a une valeur associée.
+Les arborescences de répertoires avec leurs tailles de fichiers accumulées en sont un
+exemple très naturel. Cependant, l'arborescence doit être complète avec toutes les valeurs
+accumulées avant que quoi que ce soit puisse être fait - c'est pourquoi &kdirstat; n'affiche
+pas de carte d'arborescence pendant la lecture des répertoires.
+</para>
+
+<para>
+Décidez d'une direction dans laquelle diviser la zone disponible initialement. Comme
+normalement la sous-fenêtre de la carte d'arborescence est plus large que haute, nous
+divisons d'abord horizontalement.
+</para>
+
+<para>
+Divisez la zone de sorte que chaque répertoire de niveau supérieur obtienne une zone
+proportionnelle à sa taille accumulée (c'est-à-dire sa propre taille plus la taille de
+tous ses enfants, petits-enfants, etc.).
+</para>
+
+<para>
+Pour chaque rectangle ainsi construit, répétez le processus pour chaque niveau de
+répertoire, mais changez de direction à chaque niveau. Par exemple, le deuxième niveau
+sera divisé verticalement, le troisième à nouveau horizontalement, etc.
+</para>
+
+<para>
+Cet algorithme de base ainsi que l'idée des cartes d'arborescence ont été introduits par
+Ben Shneiderman il y a quelques années.
+</para>
+
+</sect2>
+
+
+
+<sect2 id="squarified_treemaps">
+<title>Cartes d'arborescence carrées</title>
+
+<para>
+Un inconvénient majeur de l'algorithme simple de carte d'arborescence est qu'il produit
+généralement beaucoup de rectangles très fins et allongés qui sont difficiles à pointer
+avec la souris et difficiles à comparer visuellement. C'est pourquoi &kdirstat; utilise
+des cartes d'arborescence "carrées" décrites par Mark Bruls, Kees Huizing et Jarke
+J. van Wijk de l'Université Technique d'Eindhoven aux Pays-Bas. L'idée de base est
+d'améliorer le rapport d'aspect des rectangles résultants, les rendant ainsi plus
+"carrés". Même si cela ne fonctionne pas toujours parfaitement, cela améliore
+généralement beaucoup les choses : il y a normalement très peu (voire aucun) de
+rectangles fins et allongés dans une telle carte d'arborescence carrée.
+</para>
+
+</sect2>
+
+
+<sect2 id="cushioned_treemaps">
+<title>L'ombrage : cartes d'arborescence en relief</title>
+
+<para>
+Rendre une carte d'arborescence carrée a un coût : cela rend la structure de
+l'arborescence sous-jacente encore moins évidente pour l'utilisateur. Là où les cartes
+d'arborescence simples changent de direction à chaque niveau de subdivision, les cartes
+carrées changent de direction à l'intérieur de chaque niveau. Le résultat est des groupes
+de rectangles plus ou moins carrés. Le seul indice sur la structure de l'arborescence est
+que les rectangles plus grands se trouvent près de la gauche et en haut de chaque niveau.
+</para>
+
+<para>
+Ainsi, &kdirstat; utilise une technique décrite par Jarke J. van Wijk et Huub van
+de Wetering de l'Université Technique d'Eindhoven, Pays-Bas : les cartes d'arborescence
+"en relief". C'est l'ombrage 3D que vous pouvez voir dans les cartes d'arborescence de
+&kdirstat; : il donne à chaque rectangle (chaque "tuile") une impression de coussin. Ce
+n'est pas seulement pour l'esthétique, son objectif principal est de regrouper optiquement
+les fichiers ensemble.
+</para>
+
+</sect2>
+
+
+<sect2 id="treemaps_optimizations">
+<title>Améliorations propres à &kdirstat;</title>
+
+<para>
+L'algorithme de mise en carré nécessite que les éléments soient triés par taille. Une
+arborescence de répertoires Linux/Unix, cependant, a généralement beaucoup d'éléments ;
+une installation Linux complète peut facilement comprendre 150 000+ (!) fichiers et
+répertoires. Les meilleurs algorithmes de tri (tri par tas, tri rapide) ont encore un
+coût de l'ordre de n*ln(n), c'est-à-dire qu'ils sont proportionnels au produit du nombre
+d'éléments par leur logarithme.
+</para>
+
+<para>
+De même, l'algorithme d'ombrage en relief nécessite des calculs en virgule flottante
+relativement coûteux pour chaque pixel individuel de chaque tuile de la carte
+d'arborescence (même si, soit dit en passant, il est très efficace pour un algorithme
+d'ombrage 3D - aucun calcul coûteux de sinus/cosinus etc. n'est requis).
+</para>
+
+<para>
+D'un autre côté, la plupart des éléments dans les grandes arborescences sont si petits
+qu'ils ne peuvent pas être vus du tout. &kdirstat; omet simplement tout ce qui résultera
+en des tuiles de moins d'une taille prédéfinie (3*3 pixels) - ils sont de toute façon
+assez inutiles pour les utilisateurs de &kdirstat;. Ces petits éléments peuvent se
+retrouver dans un espace gris sans caractéristiques dans l'affichage.
+</para>
+
+<para>
+Ne vous étonnez donc pas si vous cliquez sur certains pixels gris et que &kdirstat;
+insiste sur le fait qu'ils appartiennent à un répertoire de niveau assez élevé : &kdirstat;
+veut simplement vous dire que ces pixels correspondent à de petits éléments dans ce
+répertoire. Utilisez la vue arborescente (la liste) au-dessus de la carte d'arborescence
+pour des informations plus détaillées.
+</para>
+
+</sect2>
+
+<sect2 id="treemaps_credits">
+<title>Remerciements et lectures complémentaires sur les cartes d'arborescence</title>
+
+<itemizedlist>
+
+<listitem><para>
+SequoiaView a donné l'inspiration pour les cartes d'arborescence dans &kdirstat;.
+SequoiaView est un programme MS Windows (c'est la mauvaise partie) créé à l'Université
+Technique d'Eindhoven, Pays-Bas. Il a introduit les cartes d'arborescence en relief et
+plus tard les cartes carrées en relief. Son but est très proche de celui de &kdirstat;.
+Si vous cherchez un programme similaire sur cette "autre" ;-) plateforme, optez pour
+SequoiaView :
+
+<ulink url="http://www.win.tue.nl/sequoiaview">
+http://www.win.tue.nl/sequoiaview
+</ulink>.
+
+</para>
+<para>
+Inutile de dire que les utilisateurs de &kdirstat; devraient facilement pouvoir monter
+leurs partitions MS Windows et utiliser &kdirstat; pour les nettoyer également. La seule
+excuse acceptable ;-) pour ne pas le faire pourrait être les partitions NTFS (pas encore
+d'accès en écriture fiable depuis Linux) ou les machines MS Windows mono-OS.
+</para></listitem>
+
+<listitem><para>
+Ben Shneiderman a inventé les cartes d'arborescence - une façon vraiment intuitive
+de visualiser le contenu numérique d'une arborescence. Pour plus d'informations, voir
+
+<ulink url="http://www.cs.umd.edu/hcil/treemaps/">
+http://www.cs.umd.edu/hcil/treemaps/
+</ulink>.
+</para></listitem>
+
+<listitem><para>
+Jarke J. van Wijk et Huub van de Wetering de l'Université Technique d'Eindhoven,
+Pays-Bas, ont écrit un article intitulé "Cushion Treemaps: Visualization of Hierarchical
+Information". Il est disponible en format PDF à
+
+<ulink url="http://www.win.tue.nl/~vanwijk/">
+http://www.win.tue.nl/~vanwijk/
+</ulink>.
+</para></listitem>
+
+<listitem><para>
+Mark Bruls, Kees Huizing et Jarke J. van Wijk de l'Université Technique d'Eindhoven ont
+écrit un article intitulé "Squarified Treemaps". Il est également disponible en format PDF à
+<ulink url="http://www.win.tue.nl/~vanwijk/">
+http://www.win.tue.nl/~vanwijk/
+</ulink>.
+</para></listitem>
+
+<listitem><para>
+Alexander Rawass avait écrit une implémentation précédente des cartes d'arborescence
+pour &kdirstat;. Même si cette partie a été complètement remplacée pour diverses raisons
+(performance, intégration dans l'application principale &kdirstat;, consommation mémoire,
+stabilité, conformité de l'interface utilisateur, manque de maintenance), elle avait prouvé
+que les cartes d'arborescence sont un ajout utile pour un programme comme &kdirstat;.
+</para></listitem>
+
+<listitem><para>
+Frederic Vernier et Laurence Nigay de l'Université de Grenoble, France, ont écrit un
+article intitulé "Modifiable Treemaps Containing Variable-Shaped Units"
+(URL inconnue, désolé). Ils ont également écrit un programme MS Windows appelé "parent"
+qui utilise un mélange de cartes d'arborescence et de listes de fichiers à l'intérieur
+des tuiles individuelles.
+</para><para>
+Personnellement, je n'aime pas beaucoup cette approche - je trouve cet affichage très
+encombré et déroutant (c'est pourquoi je n'ai rien adopté de tel pour &kdirstat;). Mais
+c'est juste mon opinion personnelle que d'autres peuvent ou non partager.
+</para></listitem>
+
+</itemizedlist>
+
+</sect2>
+</sect1>
+</chapter>
+
+
+
+<chapter id="predefined_cleanups">
+<title>Actions de nettoyage prédéfinies</title>
+
+<para>
+&kdirstat; est fourni avec un certain nombre d'actions de nettoyage prédéfinies. Vous
+pouvez toutes les configurer selon vos préférences personnelles, et vous pouvez en ajouter
+de nouvelles. Voici ce que font les actions de nettoyage prédéfinies :
+</para>
+
+<sect1 id="cleanup_open_in_konqueror">
+<title>Ouvrir dans Konqueror</title>
+
+<para>
+Cela ouvre l'élément sélectionné dans une fenêtre Konqueror.
+</para>
+<para>
+Vous pouvez utiliser Konqueror pour le supprimer (mais vous pouvez aussi le faire plus
+facilement depuis &kdirstat;), vous pouvez le déplacer ailleurs ou l'examiner de plus près.
+</para>
+<para>
+Si l'élément sélectionné est d'un type MIME connu, cela ouvrira l'application appropriée.
+Par exemple, si vous invoquez <guibutton>Ouvrir dans Konqueror</guibutton> sur une image
+PNG, Konqueror démarrera immédiatement une visionneuse d'images et affichera cette image.
+</para>
+<para>
+C'est le couteau suisse des actions de nettoyage : vous pouvez faire beaucoup de choses
+différentes avec. Ainsi, &kdirstat; ne peut pas savoir si et quand il est judicieux de
+relire ce répertoire - vous devrez le faire manuellement :
+sélectionnez <guibutton>Rafraîchir la sélection</guibutton> depuis le menu contextuel
+(clic droit) ou depuis le menu <guibutton>Fichier</guibutton>.
+</para>
+</sect1>
+
+
+<sect1 id="cleanup_open_in_terminal">
+<title>Ouvrir dans un Terminal</title>
+
+<para>
+Cela ouvre une fenêtre de terminal dans le répertoire de l'élément sélectionné.
+</para>
+
+<para>
+Utilisez ceci pour exécuter quelques commandes shell dans ce répertoire, puis fermez
+simplement cette fenêtre de terminal. Vous pouvez facilement en ouvrir une nouvelle dans
+un répertoire différent si nécessaire, donc vous n'avez pas besoin de taper répétitivement
+<userinput>cd</userinput> avec de longs chemins - fermez simplement ce terminal et ouvrez-en
+un nouveau au nouvel emplacement (tapez <keycap>Ctrl</keycap>-<keysym>T</keysym>).
+</para>
+<para>
+Comme avec l'action de nettoyage <guibutton>Ouvrir dans Konqueror</guibutton> décrite
+ci-dessus, vous devez relire manuellement le contenu du répertoire si vous effectuez
+des modifications. Sinon elles ne seront pas reflétées dans l'affichage de &kdirstat;.
+</para>
+</sect1>
+
+
+<sect1 id="cleanup_compress">
+<title>Compresser</title>
+
+<para>
+Cela compresse le répertoire sélectionné en une archive .tar.bz2.
+</para>
+
+<para>
+Par exemple, un sous-répertoire
+<userinput>/travail/home/kilroy/lettres</userinput> deviendra une archive compressée
+<userinput>/travail/home/kilroy/lettres.tar.bz2</userinput>.
+Le répertoire est supprimé une fois l'archive compressée créée avec succès
+(mais bien sûr pas si cela a échoué).
+</para>
+<para>
+Toute archive existante du même nom sera silencieusement écrasée.
+</para>
+<para>
+N'oubliez pas que Konqueror et les utilitaires associés peuvent utiliser ce type
+d'archive de manière transparente ; il n'est pas nécessaire de la décompresser si
+vous voulez lire un fichier dans cette archive. Cliquez simplement dans l'archive
+dans Konqueror.
+</para>
+
+<para>
+Si vous préférez les archives .tgz aux archives .tar.bz2, modifiez la ligne de commande
+dans les <link linkend="configuring_cleanups">paramètres de nettoyage</link>. Avec .tar.bz2,
+c'est
+</para>
+<para>
+<userinput>
+cd ..; tar cjvf &percnt;n.tar.bz2 &percnt;n &amp;&amp; rm -rf &percnt;n
+</userinput>
+</para>
+<para>
+Pour les archives .tgz, modifiez ceci en
+</para>
+<para>
+<userinput>
+cd ..; tar czvf &percnt;n.tgz &percnt;n &amp;&amp; rm -rf &percnt;n
+</userinput>
+</para>
+<para>
+Mais réfléchissez-y à deux fois avant de le faire : "bzip2" (pour .tar.bz2) compresse
+beaucoup plus efficacement que le "gzip" ordinaire (pour .tgz ou .tar.gz), et la plupart
+des systèmes le supportent tout aussi bien. C'est juste une question d'habitude de taper
+<userinput>tar cjvf</userinput> plutôt que <userinput>tar czvf</userinput> pour
+créer une archive ou <userinput>tar xjvf</userinput> plutôt que <userinput>tar
+xzvf</userinput> pour la décompresser.
+</para>
+
+</sect1>
+
+
+<sect1 id="cleanup_make_clean">
+<title>make clean</title>
+
+<para>
+Cela exécute une commande <userinput>make clean</userinput> dans le répertoire sélectionné.
+</para>
+<para>
+C'est utile si vous compilez fréquemment des logiciels à partir des sources. Après avoir
+installé le logiciel avec succès (<userinput>make install</userinput>), il n'est plus
+nécessaire de conserver les binaires compilés dans le répertoire source. D'un autre côté,
+les gens oublient souvent de nettoyer ces répertoires, vous pouvez donc le faire depuis
+&kdirstat; en quelques clics.
+</para>
+</sect1>
+
+
+<sect1 id="cleanup_clean_trash">
+<title>Supprimer les fichiers de la corbeille</title>
+
+<para>
+Cela supprime les fichiers généralement superflus, tels que les fichiers de sauvegarde
+de l'éditeur ou les fichiers core dans le répertoire sélectionné et dans ses sous-répertoires.
+</para>
+<para>
+Par défaut, les types de fichiers suivants sont supprimés :
+</para>
+<itemizedlist>
+<listitem><para>Fichiers objets issus de la compilation : *.o</para></listitem>
+<listitem><para>Fichiers de sauvegarde de l'éditeur : *~ *.bak *.auto</para></listitem>
+<listitem><para>Fichiers core : core</para></listitem>
+</itemizedlist>
+
+<para>
+Vous pouvez bien sûr <link linkend="configuring_cleanups">configurer ceci</link>
+selon vos préférences personnelles.
+</para>
+
+</sect1>
+
+
+<sect1 id="cleanup_delete_to_trash_bin">
+<title>Supprimer (vers la corbeille)</title>
+
+<para>
+Cela invoque l'opération standard KDE de "suppression", c'est-à-dire que le fichier ou
+le répertoire sélectionné est déplacé vers la corbeille KDE.
+</para>
+<para>
+Même si cela n'aide pas à récupérer immédiatement de l'espace disque, c'est une méthode
+sûre de suppression. Utilisez cette action pour tout ce dont vous voulez vous débarrasser,
+puis vérifiez vos actions en regardant dans la corbeille KDE. Si vous êtes vraiment sûr,
+sélectionnez <guibutton>Vider la corbeille</guibutton>. Jusque-là, vous pouvez toujours
+remettre ces éléments à leur emplacement d'origine.
+</para>
+<para>
+Vous pourriez envisager de ne pas utiliser cette action de nettoyage si vous nettoyez un
+répertoire sur un système de fichiers différent de votre répertoire personnel : dans ce cas,
+le "déplacement vers la corbeille" implique la copie des éléments (puis leur suppression à
+l'emplacement d'origine) ce qui peut prendre un certain temps.
+</para>
+<para>
+Notez que lorsque le déplacement d'un élément vers la corbeille échoue, &kdirstat; affichera
+quand même à tort cet élément comme supprimé alors qu'il est toujours là. Utilisez
+<guibutton>Rafraîchir la sélection</guibutton> depuis le menu contextuel pour mettre à jour
+l'affichage manuellement. Lisez <link linkend="assume_deleted">ici</link> pourquoi.
+</para>
+</sect1>
+
+
+<sect1 id="cleanup_hard_delete">
+<title>Supprimer (aucune façon de restaurer !)</title>
+
+<para>
+C'est une vraie suppression, pas simplement un déplacement vers la corbeille. C'est plus
+rapide, et l'espace disque est récupéré immédiatement, mais il n'y a aucun moyen de
+récupérer si vous avez fait une erreur. Une confirmation vous sera demandée lorsque vous
+invoquez cette action.
+</para>
+<para>
+Vous pouvez <link linkend="confirmation">modifier la configuration pour ne pas demander
+de confirmation</link>, mais ne m'en voulez pas si quelque chose se passe mal après cela.
+</para>
+<para>
+Comme avec <guibutton>Supprimer (vers la corbeille)</guibutton>, vous devrez relire
+manuellement un répertoire si cela s'est mal passé (généralement en raison de permissions
+insuffisantes) - l'affichage de &kdirstat; est désynchronisé avec le disque dur si cela
+se produit. Lisez <link linkend="assume_deleted">ici</link> pourquoi.
+</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="configuring_cleanups">
+<title>Configuration des actions de nettoyage</title>
+
+
+<para>
+Sélectionnez <guibutton>Configurer &kdirstat;...</guibutton> depuis le menu
+<guibutton>Paramètres</guibutton> et passez à la page
+<guibutton>Nettoyages</guibutton> :
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Configuration des actions de nettoyage</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="kdirstat-config-cleanups.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre de configuration des nettoyages</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="config_cleanups_reference">
+<title>Référence</title>
+
+<para>
+Sélectionnez l'action de nettoyage que vous souhaitez configurer dans la liste à gauche.
+Vous devrez peut-être cocher <guibutton>Activé</guibutton> avant de pouvoir effectuer
+des modifications.
+</para>
+
+<para>
+Entrez un titre dans le champ <guibutton>Titre</guibutton>. Vous devez marquer l'un des
+caractères du titre avec une esperluette ('&amp;') pour fournir un raccourci clavier
+dans les menus.
+</para>
+
+<para>
+Entrez une commande shell dans le champ <guibutton>Ligne de commande</guibutton>. La
+commande sera invoquée avec <userinput>/bin/sh</userinput>, vous pouvez donc utiliser
+tout ce que le shell par défaut fournit - y compris les pipelines, les opérateurs logiques
+'et' ou 'ou' ('&amp;&amp;' ou '||', respectivement) ou plusieurs commandes séparées par
+des points-virgules. Utilisez '%p' pour le chemin complet (ou URL) du fichier ou répertoire
+actuellement sélectionné ou '%n' pour le nom sans chemin. '%t' sera remplacé par le chemin
+complet du répertoire de la corbeille KDE (généralement ${HOME}/Desktop/Trash, mais comme
+cela tend à changer entre les différentes versions de KDE, il est plus sûr d'utiliser '%t').
+</para>
+<para>
+&kdirstat; changera toujours de répertoire vers l'élément sélectionné, il n'est donc pas
+nécessaire d'ajouter manuellement une commande <userinput>cd</userinput> à la ligne de
+commande.
+</para>
+<para>
+Les commandes sont démarrées en arrière-plan si possible, donc n'ajoutez pas une esperluette
+'&amp;' supplémentaire.
+</para>
+
+<para>
+Cochez <guibutton>Traiter récursivement les sous-répertoires</guibutton> si la commande
+doit être appelée pour chaque sous-répertoire du répertoire sélectionné. L'utilité ou non
+de ceci dépend du type de commande que vous avez entré : une commande <userinput>make
+clean</userinput> s'en charge généralement en interne, tandis qu'il est beaucoup plus facile
+d'utiliser <userinput>rm -f *.bak</userinput> et de laisser &kdirstat; gérer les
+sous-répertoires plutôt que d'utiliser une commande plus complexe
+<userinput>find ... | xargs ...</userinput>.
+</para>
+
+<para id="confirmation">
+Cochez <guibutton>Demander confirmation</guibutton> si vous souhaitez demander une
+confirmation à l'utilisateur à chaque invocation de cette action de nettoyage (mais pas
+pour chaque sous-répertoire récursif !). Mais attention : devoir confirmer beaucoup de
+telles invitations tend à rendre les utilisateurs inattentifs. Ils commencent à tout
+confirmer aveuglément par habitude. Utilisez donc les confirmations uniquement lorsque
+c'est vraiment nécessaire.
+</para>
+
+<para>
+Cochez la catégorie d'objets pour laquelle cette action de nettoyage fonctionne. Toutes
+les commandes ne sont pas adaptées à la fois aux fichiers et aux répertoires. Les
+pseudo-entrées &lt;Fichiers&gt; sont un cas très particulier : elles n'ont pas de
+correspondance réelle sur le disque dur. Vous pouvez cocher la catégorie &lt;Fichiers&gt;
+en toute sécurité pour les actions qui nécessitent de changer de répertoire quelque part
+et d'y exécuter une commande, mais il ne sert à rien d'essayer de supprimer une telle
+entrée &lt;Fichiers&gt;.
+</para>
+
+<para>
+Choisissez entre <guibutton>Uniquement sur la machine locale (protocole 'file:/')</guibutton>
+et <guibutton>Indépendant du protocole réseau (ftp, smb, tar, ...)</guibutton>.
+La plupart des commandes ne s'exécutent que localement. Il n'y a que quelques exceptions :
+par exemple, vous pouvez ouvrir un emplacement distant dans de nombreuses applications KDE,
+comme Konqueror.
+</para>
+
+<para>
+Sélectionnez une <guibutton>Règle de rafraîchissement</guibutton> pour indiquer à
+&kdirstat; comment mettre à jour son affichage après l'exécution de l'action de nettoyage :
+</para>
+
+<itemizedlist>
+
+<listitem>
+<para>
+<guibutton>Pas de rafraîchissement</guibutton> : ne pas rafraîchir l'affichage. Soit
+l'action de nettoyage ne modifie de toute façon pas l'arborescence, soit on ne sait pas
+quand ou comment - ou vous n'en avez pas besoin.
+</para>
+<para>
+Les actions de nettoyage avec cette règle de rafraîchissement sont les seules qui peuvent
+être invoquées pendant la lecture du sous-arbre de répertoires concerné. Toutes les autres
+ne peuvent être démarrées qu'une fois la lecture terminée.
+</para>
+</listitem>
+
+<listitem>
+<para>
+<guibutton>Mettre à jour cette entrée</guibutton> : rafraîchit la branche de répertoire
+sélectionnée. C'est la règle de rafraîchissement la plus utile pour les actions de
+nettoyage qui suppriment un certain nombre d'éléments d'une arborescence, par exemple
+<guibutton>Supprimer les fichiers de la corbeille</guibutton>.
+</para>
+<para>
+Si cette règle de rafraîchissement est sélectionnée, la commande n'est pas démarrée en
+arrière-plan : &kdirstat; doit attendre qu'elle se termine pour que l'affichage du
+répertoire puisse être rafraîchi au bon moment.
+</para>
+</listitem>
+
+<listitem>
+<para>
+<guibutton>Réactualiser le dossier parent</guibutton> : similaire à
+<guibutton>Mettre à jour cette entrée</guibutton>, mais d'un niveau plus haut. Utile pour
+les actions de nettoyage qui suppriment l'élément sélectionné mais en créent un nouveau
+au même niveau, par exemple le nettoyage standard <guibutton>Compresser</guibutton> : le
+répertoire original est supprimé, mais un fichier .tar.bz2 est créé à la place.
+</para>
+<para>
+Si cette règle de rafraîchissement est sélectionnée, la commande n'est pas démarrée en
+arrière-plan : &kdirstat; doit attendre qu'elle se termine pour que l'affichage du
+répertoire puisse être rafraîchi au bon moment.
+</para>
+</listitem>
+
+<listitem>
+<para id="assume_deleted">
+<guibutton>Supposer que l'entrée a été supprimée</guibutton> : ne relit rien depuis
+le disque, mais suppose que l'action de nettoyage supprime l'élément sélectionné,
+supprimant ainsi simplement cet élément de la représentation de l'arborescence dans
+les structures de données internes de &kdirstat;.
+</para>
+<para>
+C'est beaucoup plus rapide que tout vrai rafraîchissement, mais cela peut entraîner une
+désynchronisation des structures de données internes avec le disque dur si l'action de
+nettoyage échoue et ne supprime pas vraiment l'élément sélectionné. Dans ce cas,
+l'utilisateur devra relire manuellement cette branche de répertoire.
+</para>
+</listitem>
+</itemizedlist>
+
+
+</sect1>
+
+<sect1 id="config_cleanups_example">
+<title>Exemples</title>
+
+<sect2>
+<title>Ouvrir dans Emacs</title>
+
+<para>
+Voici un exemple simple qui vous montre comment ajouter une nouvelle action de nettoyage
+qui ouvre un fichier dans Emacs (ou tout autre éditeur de votre choix).
+</para>
+
+<para>
+Sélectionnez l'une des actions de nettoyage définies par l'utilisateur non utilisées
+dans la liste. Assurez-vous que <guibutton>Activé</guibutton> est coché.
+</para>
+
+<para>
+Entrez <userinput>Ouvrir dans &amp;Emacs</userinput> dans le champ
+<guibutton>Titre</guibutton>. Remarquez le '&amp;' : cela marque la lettre
+'E' comme raccourci clavier de cette action de nettoyage.
+</para>
+
+<para>
+Entrez <userinput>emacs &percnt;p</userinput> dans le champ <guibutton>Ligne de
+commande</guibutton>.
+</para>
+
+<para>
+Laissez <guibutton>Traiter récursivement les sous-répertoires</guibutton> et
+<guibutton>Demander confirmation</guibutton> décochés.
+</para>
+
+<para>
+Assurez-vous que seul <guibutton>Fichiers</guibutton> est coché dans la section
+<guibutton>Fonctionne avec les...</guibutton> et que <guibutton>Répertoires</guibutton>
+et <guibutton>&lt;Fichiers&gt; pseudos-entrées</guibutton> sont décochés. Si vous aimez
+beaucoup le mode "dired" d'Emacs, vous pouvez aussi laisser <guibutton>Répertoires</guibutton>
+coché, mais il ne fait vraiment aucun sens d'essayer d'ouvrir un éditeur avec une entrée
+&lt;Fichiers&gt;.
+</para>
+
+<para>
+Laissez <guibutton>Uniquement sur la machine locale</guibutton> sélectionné. Si vous avez
+envie d'expérimenter beaucoup, vous pouvez essayer de configurer Emacs pour qu'il récupère
+des fichiers depuis des emplacements distants, mais même dans ce cas, seul le protocole
+'ftp' fonctionnera probablement.
+</para>
+
+<para>
+Laissez la <guibutton>Règle de rafraîchissement</guibutton> sur
+<guibutton>Pas de rafraîchissement</guibutton>. Cela garantit qu'Emacs est démarré en
+arrière-plan et que vous pouvez continuer à travailler avec &kdirstat; pendant qu'Emacs
+s'exécute. Il ne ferait pas vraiment sens de modifier la ligne de commande en
+<userinput>emacs &percnt;p &amp;</userinput> et de changer la règle de rafraîchissement en,
+disons, <guibutton>Mettre à jour cette entrée</guibutton> : le rafraîchissement aurait
+lieu immédiatement après le démarrage d'Emacs, ce qui n'est probablement pas ce que
+vous voulez.
+</para>
+
+
+</sect2>
+
+<sect2>
+<title>Compresser</title>
+
+<para>
+Cet exemple explique l'action de nettoyage prédéfinie <guibutton>Compresser</guibutton>
+en détail. Rappelons que cette action de nettoyage crée une archive .tar.bz2 compressée
+à partir d'un répertoire.
+</para>
+
+<para>
+La <guibutton>Ligne de commande</guibutton> pour cette action de nettoyage est :
+</para>
+
+<para>
+<userinput>
+cd ..; tar cjvf &percnt;n.tar.bz2 &percnt;n &amp;&amp; rm -rf &percnt;n
+</userinput>
+</para>
+
+<para>
+<userinput>cd ..</userinput> change de répertoire d'un niveau vers le haut. Nous ne
+voulons pas faire quelque chose dans le répertoire sélectionné, mais un niveau plus haut.
+</para>
+
+<para>
+Le point-virgule <userinput>;</userinput> indique au shell d'exécuter une commande
+supplémentaire - inconditionnellement, que la commande précédente ait réussi ou échoué.
+</para>
+
+<para>
+<userinput>tar cjvf &percnt;n.tar.bz2 &percnt;n &amp;&amp;</userinput>
+est là où l'archive .tar.bz2 compressée est créée. "c" est la commande tar pour
+"créer", "j" signifie "utiliser la compression bzip2", "v" est "verbeux" (même si c'est
+strictement parlant inutile ici), "f" signifie utiliser l'argument suivant comme nom de
+fichier cible plutôt qu'un périphérique à bande par défaut (que personne n'utilise plus
+de nos jours). "&percnt;n.tar.bz2" sera remplacé par le nom du répertoire sélectionné sans
+chemin plus "tar.bz2", "&percnt;n" sera remplacé par le nom sans rien d'autre. Pour un répertoire
+<userinput>/usr/lib/quelquechose</userinput>, tout cela résultera en une commande
+</para>
+<para>
+<userinput>tar cjvf quelquechose.tar.bz2 quelquechose</userinput>
+</para>
+
+<para>
+<userinput>&amp;&amp;</userinput> fait exécuter le reste au shell uniquement si la
+commande précédente (la commande <userinput>tar</userinput>) s'est exécutée avec succès.
+Ceci est utilisé ici pour s'assurer que le répertoire n'est supprimé que si nous avons
+vraiment une archive .tar.bz2 avec le même contenu afin de pouvoir facilement la restaurer
+si nécessaire. C'est crucial en cas d'espace disque insuffisant pour créer l'archive ou
+si nous n'avons pas les permissions suffisantes pour créer l'archive.
+</para>
+
+<para>
+<userinput>rm -rf &percnt;n</userinput> supprime récursivement le répertoire sans demander
+ni se plaindre.
+</para>
+
+<para>
+<guibutton>Fonctionne avec les...</guibutton> est activé uniquement pour les répertoires.
+Notez qu'il ne serait pas judicieux de l'activer également pour les entrées &lt;Fichiers&gt; :
+l'utilisateur s'attendrait à juste titre à ce que l'archive .tar.bz2 contienne uniquement
+le contenu de l'entrée &lt;Fichiers&gt;, c'est-à-dire uniquement les fichiers à ce niveau
+de répertoire. La commande, cependant, emballerait toute l'arborescence depuis le niveau
+parent dans le fichier .tar.bz2.
+</para>
+
+<para>
+La <guibutton>Règle de rafraîchissement</guibutton> est réglée sur
+<guibutton>Réactualiser le dossier parent</guibutton> car non seulement l'élément
+sélectionné est modifié, mais aussi son parent : il perd un enfant (le répertoire) mais
+en obtient un autre (l'archive .tar.bz2).
+</para>
+
+<para>
+Notez que <guibutton>Traiter récursivement les sous-répertoires</guibutton> n'est pas
+coché ici : la commande <userinput>tar</userinput> et <userinput>rm
+-rf</userinput> s'occupent de tout sous-répertoire.
+</para>
+
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="feedback_mail">
+<title>Courriel de retour d'information</title>
+
+<sect1 id="feedback_mail_description">
+<title>Description</title>
+
+<para>
+<guibutton>Envoyer un courriel de retour...</guibutton> depuis le menu
+<guibutton>Aide</guibutton> ouvre cette boîte de dialogue :
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Courriel de retour d'information</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="feedback-mail.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Capture d'écran de la fenêtre de courriel de retour</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+Vous répondez aux questions (au moins celles marquées comme obligatoires) et ajoutez vos
+commentaires personnels (en français de préférence, ou dans le cas particulier de &kdirstat;
+alternativement en allemand).
+</para>
+
+<para>
+En cliquant sur le bouton <guibutton>Envoyer ce courriel...</guibutton>, votre
+<link linkend="mail_client">client de messagerie</link> s'ouvre avec un
+<link linkend="mail_example">message précomposé</link>.
+Vous pouvez vérifier ce message pour vous assurer qu'il ne contient rien que vous
+n'aimez pas. Lorsque vous êtes convaincu que le message est correct et ne contient
+rien que vous n'aimez pas, envoyez-le.
+</para>
+
+<para>
+Avec votre opinion et vos commentaires personnels, vous pouvez contribuer au mouvement
+Open Source - même si vous n'êtes pas développeur, même si vous n'avez aucune idée de
+comment améliorer ou modifier le logiciel. Votre opinion est importante, même si vous
+décidez que vous n'aimez pas le programme et envoyez le message avec "ce programme est
+nul" coché.
+</para>
+
+<para>
+Les logiciels Open Source vivent et respirent grâce aux retours des utilisateurs. Si une
+fonctionnalité vous manque, dites-le nous. Si vous trouvez une fonctionnalité existante
+déroutante, dites-le nous. Si vous trouvez qu'une application est surchargée de
+fonctionnalités au point de ne plus trouver celles dont vous avez vraiment besoin,
+dites-le nous.
+</para>
+
+<para>
+D'un autre côté, si vous aimez le programme tel qu'il est et que vous ne souhaiteriez
+pas le voir modifié d'une quelconque façon, dites-le nous également. Si vous voulez
+simplement remercier ceux qui se donnent la peine d'écrire tous ces logiciels, faites-le.
+Votre contribution est appréciée, qu'elle soit positive ou négative.
+</para>
+
+<para>
+Il n'y a rien de plus frustrant pour un auteur de logiciel Open Source que cette
+incertitude persistante quant à savoir si quelqu'un utilise vraiment son programme. Il
+peut ne recevoir aucune réponse des utilisateurs - cela signifie-t-il que personne
+n'utilise le logiciel, ou cela signifie-t-il simplement qu'il fonctionne si bien que
+personne n'a de raison de se plaindre ? Vous pouvez contribuer en lui disant qu'il fait
+du bon travail et qu'il devrait continuer.
+</para>
+
+<para>
+Dans le cas contraire, pourquoi ne pas dire à l'auteur d'un programme particulièrement
+agaçant à quel point il est agaçant ? Cela pourrait le faire réfléchir et reconsidérer
+son travail.
+</para>
+
+<para>
+L'Open Source est l'une des plus grandes démocraties du monde. Faites entendre votre voix !
+</para>
+
+</sect1>
+
+
+
+<sect1 id="privacy">
+<title>Confidentialité</title>
+
+<para>
+Votre courriel envoyé avec <guibutton>Envoyer un courriel de retour...</guibutton> est
+envoyé aux auteurs de ce programme, à personne d'autre. Aucune entreprise ou institution
+gouvernementale ne recevra votre adresse courriel ou vos données personnelles. Vous avez
+peut-être remarqué qu'aucune donnée personnelle n'est demandée dans le formulaire de
+retour. En particulier, vous ne recevrez jamais de courrier indésirable d'aucune sorte
+parce que vous avez envoyé un courriel de retour.
+</para>
+
+<para>
+Nous, les auteurs de ce programme, détestons le courrier indésirable probablement encore
+plus que l'utilisateur KDE moyen car nous en recevons beaucoup - les robots de courrier
+indésirable ont tendance à extraire les adresses courriel du code source et des pages web,
+vous pouvez donc être sûrs que nous faisons de notre mieux pour rendre la vie aussi
+difficile que possible aux spammeurs et certainement pas les aider d'une quelconque façon.
+</para>
+
+<para>
+L'objectif de tous ces courriels de retour est de recueillir des informations sur la
+satisfaction moyenne des utilisateurs, sur les opinions moyennes concernant l'ensemble
+des fonctionnalités d'une application, la stabilité et la courbe d'apprentissage d'une
+application. Tout est question de moyennes, donc aucune donnée spécifique d'un utilisateur
+ne sera jamais rendue publique - seulement des moyennes statistiques sur un grand nombre
+d'utilisateurs, si tant est que ce soit le cas.
+</para>
+
+</sect1>
+
+<sect1 id="mail_example">
+<title>Exemple de courriel de retour</title>
+
+<para>
+Un courriel de retour typique ressemble à ceci :
+</para>
+
+<para>
+<screen width="60">
+<userinput>[kde-feedback] KDirStat-2.4.4 user feedback</userinput>
+
+<userinput>&lt;comment&gt;</userinput>
+<userinput>C'est ici que vont les commentaires personnels.</userinput>
+<userinput>Vous pouvez entrer pratiquement n'importe quel nombre de lignes.</userinput>
+<userinput>&lt;/comment&gt;</userinput>
+
+<userinput>general_opinion="5/8_nice_try"</userinput>
+
+<userinput>features_liked="stay_on_one_filesys"</userinput>
+<userinput>features_liked="feedback"</userinput>
+<userinput>features_liked="pacman"</userinput>
+
+<userinput>stability="5/5_keeps_crashing"</userinput>
+<userinput>learning_curve="5/5_still_no_clue"</userinput>
+<userinput>recommend="yes"</userinput>
+</screen>
+</para>
+
+
+<para>
+Remarquez que c'est tout en ASCII simple. Il n'y a pas de pièce jointe, pas de champs
+d'en-tête cachés, pas d'informations sur votre machine ou sur vous-même - uniquement ce
+que vous enverriez à n'importe qui d'autre lorsque vous envoyez un courriel.
+</para>
+
+<para>
+Au fait, c'est aussi pourquoi nous avons gardé le format aussi simple. Beaucoup de
+développeurs préfèrent aujourd'hui XML pour tous les types de données, mais l'utilisateur
+final (vous) devrait pouvoir lire et comprendre ce que vous envoyez - juste pour vous
+assurer que vous n'envoyez pas d'informations que vous préféreriez garder pour vous.
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="developers_guide">
+<title>Guide du développeur pour KDirStat</title>
+
+<para>
+La majeure partie de ce que vous pouvez voir de &kdirstat; est un widget KDE séparé qui
+peut être utilisé dans d'autres applications également. Ces parties de &kdirstat; sont
+même sous licence LGPL, vous êtes donc autorisé à les utiliser dans des applications
+commerciales.
+</para>
+
+<para>
+Les sources de &kdirstat; sont abondamment documentées. Lisez la documentation dans les
+fichiers d'en-tête pour plus de détails ou utilisez "kdoc" pour générer une documentation
+HTML à partir d'eux.
+</para>
+
+
+</chapter>
+
+<chapter id="faq">
+<title>Questions et réponses</title>
+
+
+&reporting.bugs;
+
+
+<qandaset id="faqlist">
+
+<qandaentry id="ftp_server">
+<question>
+<para>
+Puis-je utiliser &kdirstat; pour analyser un répertoire sur un serveur FTP ?
+</para>
+</question>
+<answer>
+<para>
+Oui. Spécifiez simplement l'URL en ligne de commande ou même dans la boîte de sélection
+de répertoire de &kdirstat; :
+<userinput>kdirstat ftp:/ftp.monserveur.org/pub</userinput> (ligne de commande) ou
+<userinput>ftp:/ftp.monserveur.org/pub</userinput> (boîte de sélection de répertoire).
+</para>
+<para>
+&kdirstat; supporte tous les protocoles que KDE supporte. Vous pouvez même utiliser le
+protocole "tar" (est-ce que cela a un sens de faire cela ? À vous de décider). La seule
+restriction est que le protocole doit supporter le service "lister le répertoire" - ce que
+tous les protocoles ne font pas.
+</para>
+<para>
+Si vous n'êtes pas sûr de la syntaxe à utiliser, essayez-le d'abord dans Konqueror et
+regardez la barre d'URL de Konqueror. Par exemple, pour comprendre comment spécifier une
+URL "tar", cliquez dans une archive "tar" dans Konqueror et regardez l'URL résultante
+pour avoir une idée de ce à quoi elle ressemble.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="exact_byte_size">
+<question>
+<para>
+Comment obtenir la taille exacte en octets d'une entrée plutôt qu'en mégaoctets ou
+kilooctets ?
+</para>
+</question>
+<answer>
+<para>
+Faites un clic droit sur le nombre dans la liste.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="du_reports_different_total">
+<question>
+<para>
+Pourquoi la commande "du" rapporte-t-elle parfois des tailles différentes de &kdirstat; ?
+</para>
+</question>
+<answer>
+<para>
+Il existe différents types de tailles rapportées par différents types d'appels système
+ou de services KDE : la taille en octets et la taille en blocs.
+</para>
+<para>
+La taille en octets est le nombre exact d'octets d'un fichier ou d'un répertoire. C'est
+ce qu'utilise &kdirstat;.
+</para>
+<para>
+La taille en blocs est le nombre de blocs disque alloués par un fichier ou un répertoire.
+La plupart des commandes "du" utilisent cela. Selon le type de système de fichiers, des
+parties du dernier bloc d'un fichier ou d'un répertoire peuvent être inutilisées, mais
+quand même réservées. Si un tel système de fichiers utilise des blocs de 1024 octets, un
+fichier aura au moins besoin de ces 1024 octets, qu'il fasse 1024, 200 ou même un seul
+octet. Cela dépend du type de système de fichiers et parfois même de la façon dont il est
+configuré - c'est donc très spécifique au système.
+</para>
+<para>
+&kdirstat; utilise la taille en octets car c'est la seule taille qui est retournée de
+manière fiable par tous les types d'appels système et de services KDE. Cela ne fait
+vraiment une différence que dans des situations très pathologiques, par exemple si vous
+avez des sous-répertoires avec un grand nombre de petits fichiers.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="sparse_files">
+<question>
+<para>
+Que signifie cet affichage :
+<userinput>
+6,3 Mo (alloué : 1,3 Mo)
+</userinput>
+</para>
+</question>
+
+<answer>
+<para>
+C'est ce qu'on appelle un "fichier fragmenté" (également connu sous le nom de "fichier
+avec des trous"). Cela signifie que le fichier fait réellement 6,3 Mo, mais seulement
+1,3 Mo de cela sont réellement alloués - le reste n'est que des zéros.
+</para>
+<para>
+C'est typique des fichiers core (images mémoire de programmes qui ont planté, écrits dans
+un fichier nommé <userinput>core</userinput> ou <userinput>core.*</userinput>)
+ou des fichiers de base de données binaires : le noyau écrit ces fichiers de façon à ce
+que seul le contenu réel des données soit alloué sur le disque et non la grande quantité
+de zéros.
+</para>
+<para>
+Techniquement, un fichier fragmenté est créé avec l'appel système open() ordinaire pour
+ouvrir le fichier en écriture, puis en utilisant lseek() pour étendre la taille du fichier
+au-delà de sa taille précédente, puis en écrivant au moins un octet. La zone entre
+l'ancienne et la nouvelle taille du fichier devient un "trou" dans le fichier - elle n'est
+pas réellement allouée sur le disque. Lors de la lecture de cette zone, une valeur zéro
+est retournée pour chaque octet lu. Lorsque des octets sont écrits dans cette zone, des
+blocs du système de fichiers sont réellement alloués, créant éventuellement deux trous
+plus petits avant et après la zone écrite.
+</para>
+<para>
+Veuillez noter que la plupart des utilitaires de fichiers ne gèrent pas élégamment les
+fichiers fragmentés. Ceux qui les supportent ont généralement besoin d'arguments spéciaux
+en ligne de commande. Sinon, ils ont tendance à simplement lire tous les octets (y compris
+tous les zéros des trous) et à les écrire vers un nouvel emplacement - ce qui signifie
+bien sûr que le fichier résultant n'est plus fragmenté, mais occupe vraiment tout l'espace
+que sa taille indique. Cela peut signifier que vous pouvez faire gonfler le fichier core
+de 6,3 Mo ci-dessus de 1,3 Mo d'utilisation disque (et 5 Mo de zéros dans les trous) à
+vraiment 6,3 Mo d'utilisation disque.
+</para>
+<para>
+Les utilitaires de système de fichiers GNU comme
+<userinput>tar</userinput> et <userinput>rsync</userinput> supportent au moins des options
+en ligne de commande pour éviter cela.
+GNU <userinput>cp</userinput> est une exception notable - il a une heuristique qui semble
+très bien fonctionner.
+Les gestionnaires de fichiers graphiques, en revanche, ont tendance à simplement ignorer
+cela - même les plus modernes et les plus beaux.
+</para>
+<para>
+En cas de doute, vérifiez vos outils de fichiers favoris. Produisez un fichier core - ils
+sont normalement des fichiers fragmentés. Plus un programme utilise de mémoire, plus il
+est probable qu'il ait de grandes sections de zéros dans son image mémoire. Essayez ceci
+(dans un terminal) :
+<itemizedlist>
+
+<listitem><para>
+Activez les fichiers core - ils sont généralement désactivés dans la plupart des
+distributions Linux :
+</para>
+<para>
+<userinput>ulimit -c 128000</userinput>
+</para>
+<para>
+Cela fixe la limite des fichiers core à 128000 blocs (512 octets chacun), c'est-à-dire
+à 64 Mo. Cela devrait être suffisant.
+</para></listitem>
+
+<listitem><para>
+Démarrez un programme avec une consommation mémoire considérable - en arrière-plan :
+</para>
+<para>
+<userinput>xmms &amp;</userinput>
+</para></listitem>
+
+<listitem><para>
+Faites planter le programme pour produire un fichier core :
+</para>
+<para>
+<userinput>kill -ABRT %xmms</userinput>
+</para>
+<para>
+Cela envoie le signal ABORT à ce processus, le terminant avec un fichier core.
+</para></listitem>
+
+<listitem><para>
+Examinez le fichier core :
+</para>
+<para>
+<userinput>kdirstat .</userinput>
+</para>
+<para>
+ou, pour un programme tiers neutre (du paquet Linux coreutils) :
+</para>
+<para>
+<userinput>/usr/bin/stat core*</userinput>
+</para>
+<para>
+(Vous devez multiplier la sortie "blocks" par 512 pour connaître l'espace disque alloué)
+</para></listitem>
+
+<listitem><para>
+Copiez ce fichier core (par exemple dans un autre répertoire) et examinez-le à nouveau.
+Vous serez surpris de voir à quel point tous ces zéros sont soudainement devenus "lourds".
+Essayez cela avec plusieurs utilitaires de copie (<userinput>/bin/cp</userinput>,
+gestionnaires de fichiers de votre choix). N'oubliez pas de toujours utiliser l'original
+fragmenté, pas les copies gonflées !
+</para>
+<para>
+Déplacer des fichiers devrait toujours être sûr (à moins qu'un gestionnaire de fichiers
+soit vraiment, vraiment stupide), mais copier peut facilement faire gonfler les fichiers
+fragmentés en d'énormes assemblages de zéros sans signification.
+</para></listitem>
+
+</itemizedlist>
+</para>
+<para>
+D'accord, les fichiers fragmentés sont plutôt rares de nos jours, donc ce n'est généralement
+pas un problème. Souvenez-vous simplement que &kdirstat; sait comment les gérer. ;-)
+</para>
+<para>
+Veuillez noter que cette gestion spéciale n'est en vigueur que si les méthodes de lecture
+optimisées de &kdirstat; pour les fichiers locaux sont utilisées (vous pouvez les activer
+et les désactiver dans la boîte de dialogue <guibutton>Paramètres -&gt; Général</guibutton>)
+- les méthodes KIO de KDE ne retournent pas ce type d'information.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="hard_links">
+<question>
+<para>
+Que signifie cet affichage :
+<userinput>
+878,5 Ko / 21 liens
+</userinput>
+</para>
+</question>
+<answer>
+<para>
+Cela signifie que ce fichier a un certain nombre de liens physiques. &kdirstat; n'utilise
+que la portion respective de sa taille pour ses statistiques - dans le cas ci-dessus,
+878,5 Ko / 21 = 41,8 Ko. Lorsqu'un autre lien vers ce fichier est traité, les 875,5/21
+Ko suivants sont ajoutés au total - et ainsi de suite.
+</para>
+<para>
+La raison est qu'il ne fait aucun sens de compter un tel fichier 21 fois avec sa taille
+complète - cela fausserait grandement les statistiques. Par exemple, regardez
+<userinput>/usr/lib/locale</userinput> sur un système Linux (SuSE) - de nombreux fichiers
+là-bas ont plusieurs liens physiques pour économiser de l'espace disque. La somme totale
+de ce répertoire sur un système SuSE Linux 9.2-i386 est de 40,5 Mo -- contre 205,6 Mo
+que la sortie cumulée de <userinput>/bin/ls -lR</userinput> suggérerait (ou &kdirstat;
+avec <guibutton>utiliser les méthodes de lecture locales optimisées</guibutton> désactivé
+dans la boîte de dialogue <guibutton>Paramètres -&gt; Général</guibutton>)
+- parfois, comme dans cet exemple, cela fait vraiment une différence !
+</para>
+<para>
+Contexte technique : dans les systèmes de fichiers Unix/Linux, les fichiers ont
+principalement un identifiant numérique, leur "i-numéro", l'index du "i-nœud" correspondant,
+les informations administratives du système de fichiers. Chaque entrée de répertoire d'un
+fichier n'est en réalité qu'un lien vers cet i-nœud. Vous pouvez avoir le même fichier
+sous plusieurs noms distincts de cette façon - même dans des répertoires différents. La
+seule limitation est que cela est restreint à un système de fichiers (c'est-à-dire à une
+partition de disque) car ces i-numéros sont uniques par système de fichiers.
+</para>
+<para>
+Les liens physiques peuvent également introduire toute une nouvelle dimension de problèmes
+avec les applications qui créent des copies de sauvegarde des fichiers de travail - elles
+renomment généralement le fichier original en nom de sauvegarde et écrivent leur contenu
+dans un nouveau fichier. Les éditeurs fonctionnent généralement ainsi. Cela signifie
+cependant que tout lien physique supplémentaire vers ce fichier pointe maintenant vers la
+copie de sauvegarde obsolète - ce qui n'est normalement pas souhaité. Très peu
+d'applications gèrent cela correctement. Donc la conclusion est : utilisez les liens
+physiques uniquement si vous savez très bien ce que vous faites.
+</para>
+<para>
+C'est probablement pourquoi les liens symboliques sont devenus beaucoup plus populaires
+ces dernières années : ils peuvent également pointer vers différents systèmes de fichiers,
+même (via NFS) vers différents hôtes dans le réseau. En contrepartie, les liens symboliques
+peuvent aussi être obsolètes - pointant vers le néant. Cela ne peut pas arriver avec les
+liens physiques : un fichier n'est vraiment supprimé que lorsque le dernier de ses liens
+est supprimé (cela inclut les i-nœuds ouverts en mémoire - c'est-à-dire les processus
+ayant encore un descripteur de fichier ouvert vers cet i-nœud).
+</para>
+<para>
+Les répertoires reposent entièrement sur les liens physiques (c'est aussi pourquoi
+&kdirstat; ne tente rien d'intelligent avec les répertoires à liens physiques multiples
+- cela n'aurait aucun sens) : les entrées ".." dans chaque répertoire pointant vers son
+parent ne sont qu'un autre lien physique vers ce parent (nommé ".."), et "." n'est
+qu'un lien physique vers lui-même. C'est aussi pourquoi même un répertoire complètement
+vide a un nombre de liens de 2 - un pour "." dans son propre répertoire, un pour son
+nom dans son répertoire parent.
+</para>
+<para>
+Comme les fichiers fragmentés ci-dessus, les fichiers ordinaires avec plusieurs liens
+physiques sont plutôt rares de nos jours - mais ils sont encore utilisés, et parfois ils
+peuvent faire une différence, c'est pourquoi &kdirstat; a une gestion spéciale pour eux.
+</para>
+<para>
+Veuillez noter que cette gestion spéciale n'est en vigueur que si les méthodes de lecture
+optimisées de &kdirstat; pour les fichiers locaux sont utilisées (vous pouvez les activer
+et les désactiver dans la boîte de dialogue <guibutton>Paramètres -&gt; Général</guibutton>)
+- les méthodes KIO de KDE ne retournent pas ce type d'information.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="mail_client">
+<question>
+<para>
+Je ne veux pas utiliser KMail à chaque fois que j'envoie un courriel avec &kdirstat;.
+Comment indiquer à &kdirstat; d'utiliser un client de messagerie différent ?
+</para>
+</question>
+<answer>
+<para>
+Démarrez <userinput>kcontrol</userinput> ou sélectionnez
+<guibutton>Préférences</guibutton> dans le menu KDE, puis sélectionnez
+<guibutton>Réseau</guibutton> -&gt; <guibutton>Courriel</guibutton> et entrez
+votre client de messagerie favori dans le champ
+<guibutton>Client de messagerie préféré</guibutton>.
+</para>
+</answer>
+</qandaentry>
+
+
+<qandaentry id="tree_colors">
+<question>
+<para>
+Comment se débarrasser de toutes ces couleurs de barres de pourcentage ? Je veux qu'elles
+soient toutes affichées dans la même couleur.
+</para>
+</question>
+<answer>
+<para>
+Sélectionnez <guibutton>Configurer &kdirstat;...</guibutton> depuis le menu
+<guibutton>Paramètres</guibutton>, passez à la page <guibutton>Couleurs de
+l'arborescence</guibutton> et faites glisser le curseur complètement vers le haut.
+</para>
+</answer>
+</qandaentry>
+
+
+</qandaset>
+
+</chapter>
+
+
+<chapter id="credits">
+
+<!-- Incluez ici les remerciements pour les programmeurs, les auteurs de la documentation et
+les contributeurs. La licence de votre logiciel doit ensuite être incluse ci-dessous
+avec une référence au fichier de licence approprié inclus dans la distribution KDE. -->
+
+<title>Remerciements et licence</title>
+
+<para>
+&kapp;
+</para>
+<para>
+Copyright du programme 1999-2002 Stefan Hundhammer <email>sh@suse.de</email>
+</para>
+
+<para>
+Contributeurs :
+<itemizedlist>
+<listitem>
+	<para>Alexander Rawawss <email>alexannika@users.sourceforge.net</email>
+	Implémentation initiale des cartes d'arborescence (celles qui ne fonctionnent plus actuellement)
+	</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para>
+Copyright de la documentation 2002 Stefan Hundhammer <email>sh@suse.de</email>
+</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL : ne pas supprimer. Le développement commercial devrait -->
+<!-- remplacer ceci par leur copyright et soit le supprimer soit le réinitialiser. -->
+
+&underGPL;        	 <!-- Licence GPL -->
+
+</chapter>
+
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-kdirstat">
+<title>Comment obtenir KDirStat</title>
+
+<para>
+&kdirstat; fait partie du projet KDE
+<ulink url="http://www.kde.org">http://www.kde.org</ulink>.
+
+&kdirstat; peut être trouvé sur la page d'accueil de &kdirstat; à
+<ulink url="http://kdirstat.sourceforge.net/">http://kdirstat.sourceforge.net/</ulink>
+ou sur le site miroir à
+<ulink url="http://www.suse.de/~sh/kdirstat/">http://www.suse.de/~sh/kdirstat/</ulink>
+.</para>
+</sect1>
+
+<sect1 id="requirements">
+<title>Prérequis</title>
+
+<itemizedlist>
+<listitem>
+<para>Linux ou tout autre système d'exploitation de type Unix.</para>
+<para>Aussi stupide que cela puisse paraître : il y avait pas mal de personnes se
+plaignant de ne pas pouvoir installer &kdirstat; sur leur système Win9x. Beaucoup de
+personnes semblent croire que si cela a des fenêtres, cela doit fonctionner sur
+MS Windows...
+</para>
+</listitem>
+
+<listitem><para>KDE 3.x</para></listitem>
+
+</itemizedlist>
+
+<para>
+Toutes les bibliothèques requises ainsi que &kdirstat; lui-même peuvent être trouvés sur
+<ulink url="http://kdirstat.sourceforge.net/">La page d'accueil de &kdirstat;</ulink>.
+</para>
+</sect1>
+
+
+<sect1 id="compilation">
+<title>Compilation et installation</title>
+
+<para>
+Voir le fichier "build-howto.html" dans l'archive de distribution.
+</para>
+
+</sect1>
+
+
+</appendix>
+
+&documentation.index;
+</book>
+<!--
+Variables locales :
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+Fin :
+-->
